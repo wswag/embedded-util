@@ -13,6 +13,10 @@ void RegisterStringInterface::setLength(size_t value)
 }
 void RegisterStringInterface::setFrom(const char* src) 
 {
+    if (src == nullptr) {
+        setLength(0);
+        return;
+    }
     int len = strlen(src);
     auto cap = getCapacity();
     len = len > cap ? cap : len;
