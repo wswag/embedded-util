@@ -4,24 +4,26 @@
 template<class T>
 class ChainedList
 {
-    public:
+    private:
         T *_head = nullptr;
+    public:
         void add(T *elem);
         void rem(T *elem);
-        T* head() { return _head; }
-        T* tail();
-        bool contains(T *elem);
-        int count();
+        T* head() const { return _head; }
+        T* tail() const;
+        bool contains(T *elem) const;
+        int count() const;
         void reset() { _head = nullptr; }
 };
 
 template<class T>
 class ChainedUnidirectionalElement
 {
-    public:
+    protected:
         T* _next = nullptr;
+    public:
         void setNext(T* next) { _next = next; }
-        T* next() { return _next; }
+        T* next() const { return _next; }
 };
 
 template<class T>
@@ -53,7 +55,7 @@ void ChainedList<T>::rem(T *elem)
 }
 
 template<class T>
-T* ChainedList<T>::tail()
+T* ChainedList<T>::tail() const
 {
     if (_head == 0)
         return 0;
@@ -67,7 +69,7 @@ T* ChainedList<T>::tail()
 }
 
 template<class T>
-bool ChainedList<T>::contains(T *elem) 
+bool ChainedList<T>::contains(T *elem) const
 {
     T* cursor = _head;
     while (cursor) {
@@ -79,7 +81,7 @@ bool ChainedList<T>::contains(T *elem)
 }
 
 template<class T>
-int ChainedList<T>::count()
+int ChainedList<T>::count() const
 {
     int n = 0;
     T* cursor = _head;

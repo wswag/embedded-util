@@ -10,7 +10,6 @@
             "includePath": [
                 "/mnt/data/source/platformio/embedded-util/include",
                 "/mnt/data/source/platformio/embedded-util/src",
-                "/mnt/data/source/platformio/embedded-util/.pio/libdeps/native/ArduinoFake/src",
                 ""
             ],
             "browse": {
@@ -18,16 +17,24 @@
                 "path": [
                     "/mnt/data/source/platformio/embedded-util/include",
                     "/mnt/data/source/platformio/embedded-util/src",
-                    "/mnt/data/source/platformio/embedded-util/.pio/libdeps/native/ArduinoFake/src",
                     ""
                 ]
             },
             "defines": [
-                "PLATFORMIO=60109",
+                "ESP32",
+                "ESP_PLATFORM",
+                "F_CPU=240000000L",
+                "HAVE_CONFIG_H",
+                "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"",
+                "PLATFORMIO=60111",
+                "ARDUINO_NodeMCU_32S",
                 ""
             ],
-            "compilerPath": "gcc",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++11",
+            "compilerPath": "/home/swagner/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc",
             "compilerArgs": [
+                "-mlongcalls",
                 ""
             ]
         }
