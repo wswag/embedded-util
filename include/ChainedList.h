@@ -8,9 +8,11 @@ class ChainedList
         T *_head = nullptr;
     public:
         void add(T *elem);
-        void rem(T *elem);
+        void rem(T *elem, T *prevElem = nullptr);
+        void replace(T *elem, T* newElem, T *prevElem = nullptr);
         T* head() const { return _head; }
         T* tail() const;
+        T* prev(T* elem) const;
         bool contains(T *elem) const;
         int count() const;
         void reset() { _head = nullptr; }
@@ -39,19 +41,40 @@ void ChainedList<T>::add(T* elem)
 }
 
 template<class T>
-void ChainedList<T>::rem(T *elem) 
+void ChainedList<T>::rem(T *elem, T *prevElem) 
 {
-    T* cursor = head();
-    T* prev = nullptr;
-    while (cursor) {
-        if (cursor == elem)
-            break;
-        prev = cursor;
-        cursor = cursor->next();
+    if (_head == nullptr) return;
+    if (elem == _head) {
+        _head = _head->next();
+        return;
     }
-    if (cursor == elem)
+    T* prevE = prevElem;
+    if (prevE == nullptr || prev->next() != elem) {
+        prevE = prev(elem)
+    }
+    if (prev)
         // remove the element
         prev->setNext(elem->next());
+}
+
+template<class T>
+void ChainedList<T>::replace(T *elem, T* newElem, T *prevElem) 
+{
+    if (_head == nullptr) return;
+    if (elem == _head) {
+        newElem->setNext(_head);
+        _head = newElem;
+        return;
+    }
+    T* prevE = prevElem;
+    if (prevE == nullptr || prev->next() != elem) {
+        prevE = prev(elem)
+    }
+    if (prev) {
+        // remove the element
+        newElem->setNext(elem->next());
+        prev->setNext(newElem);
+    }
 }
 
 template<class T>
@@ -66,6 +89,18 @@ T* ChainedList<T>::tail() const
             cursor = cursor->next();
         return cursor;
     }
+}
+
+template<class T>
+T* ChainedList<T>::prev(T* elem) const
+{
+    auto cursor = head();
+    while (cursor) {
+        if (cursor->next() == elem)
+            return cursor;
+        cursor = cursor->next();
+    }
+    return nullptr;
 }
 
 template<class T>
