@@ -59,12 +59,12 @@ void ChainedList<T>::rem(T *elem, T *prevElem)
         return;
     }
     T* prevE = prevElem;
-    if (prevE == nullptr || prev->next() != elem) {
+    if (prevE == nullptr || prevE->next() != elem) {
         prevE = prev(elem);
     }
-    if (prev)
+    if (prevE)
         // remove the element
-        prev->setNext(elem->next());
+        prevE->setNext(elem->next());
 }
 
 template<class T>
@@ -77,13 +77,13 @@ void ChainedList<T>::replace(T *elem, T* newElem, T *prevElem)
         return;
     }
     T* prevE = prevElem;
-    if (prevE == nullptr || prev->next() != elem) {
+    if (prevE == nullptr || prevE->next() != elem) {
         prevE = prev(elem);
     }
-    if (prev) {
+    if (prevE) {
         // remove the element
         newElem->setNext(elem->next());
-        prev->setNext(newElem);
+        prevE->setNext(newElem);
     }
 }
 
