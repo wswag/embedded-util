@@ -3,7 +3,7 @@
 
 // object lifetime service
 template<class T>
-class Capsule : ChainedUnidirectionalElement<Capsule<T>> {
+class Capsule : public ChainedUnidirectionalElement<Capsule<T>> {
     private:
         T* _obj;
     public:

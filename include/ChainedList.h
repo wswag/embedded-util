@@ -7,7 +7,10 @@ class ChainedList
     private:
         T *_head = nullptr;
     public:
+        // add to tail, less efficient
         void add(T *elem);
+        // add to head, more efficient
+        void prepend(T *elem);
         void rem(T *elem, T *prevElem = nullptr);
         void replace(T *elem, T* newElem, T *prevElem = nullptr);
         T* head() const { return _head; }
@@ -38,6 +41,13 @@ void ChainedList<T>::add(T* elem)
         T* cursor = tail();
         cursor->setNext(elem);
     }
+}
+
+template<class T>
+void ChainedList<T>::prepend(T* elem)
+{
+    elem->setNext(_head);
+    _head = elem;
 }
 
 template<class T>
