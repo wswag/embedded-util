@@ -11,6 +11,7 @@ class RegisterStringInterface {
     public:
         virtual ~RegisterStringInterface() {}
         virtual const char* getBuffer() const = 0;
+        virtual char* getMutableBuffer() const = 0;
         virtual uint16_t getCapacity() const = 0;
 
         size_t length() const;
@@ -35,6 +36,7 @@ class RegisterString : public RegisterStringInterface {
         void setLength(size_t value) override;
 
         const char* getBuffer() const override;
+        char* getMutableBuffer() const override;
 
         virtual uint16_t getCapacity() const override;
 
@@ -87,6 +89,12 @@ bool RegisterString<REGS_SIZE>::operator<=(const char* rvalue) const
 
 template<int REGS_SIZE>
 const char* RegisterString<REGS_SIZE>::getBuffer() const
+{
+    return buffer;
+}
+
+template<int REGS_SIZE>
+char* RegisterString<REGS_SIZE>::getMutableBuffer() const
 {
     return buffer;
 }
