@@ -60,7 +60,7 @@ void ChainedList<T>::rem(T *elem, T *prevElem)
     }
     T* prevE = prevElem;
     if (prevE == nullptr || prev->next() != elem) {
-        prevE = prev(elem)
+        prevE = prev(elem);
     }
     if (prev)
         // remove the element
@@ -78,7 +78,7 @@ void ChainedList<T>::replace(T *elem, T* newElem, T *prevElem)
     }
     T* prevE = prevElem;
     if (prevE == nullptr || prev->next() != elem) {
-        prevE = prev(elem)
+        prevE = prev(elem);
     }
     if (prev) {
         // remove the element
