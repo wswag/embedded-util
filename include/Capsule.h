@@ -8,10 +8,10 @@ class Capsule : public ChainedUnidirectionalElement<Capsule<T>> {
         T* _obj;
     public:
         Capsule(T* obj) : _obj(obj) { _obj->incrRef(); }
-        Capsule(Capsule& m) : _msg(m._obj) { _obj->incrRef(); };
-        virtual ~Capsule() { obj->decrRef(); }
+        Capsule(Capsule& m) : _obj(m._obj) { _obj->incrRef(); };
+        virtual ~Capsule() { _obj->decrRef(); }
 
-        const T& getObject() const { return *_msg; }
+        const T& getObject() const { return *_obj; }
 };
 
 class ManagedObject {
