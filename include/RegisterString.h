@@ -11,7 +11,7 @@ class RegisterStringInterface {
     public:
         virtual ~RegisterStringInterface() {}
         virtual const char* getBuffer() const = 0;
-        virtual char* getMutableBuffer() const = 0;
+        virtual char* getMutableBuffer() = 0;
         virtual uint16_t getCapacity() const = 0;
 
         size_t length() const;
