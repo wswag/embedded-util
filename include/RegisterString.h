@@ -36,7 +36,7 @@ class RegisterString : public RegisterStringInterface {
         void setLength(size_t value) override;
 
         const char* getBuffer() const override;
-        char* getMutableBuffer() const override;
+        char* getMutableBuffer() override;
 
         virtual uint16_t getCapacity() const override;
 
@@ -94,7 +94,7 @@ const char* RegisterString<REGS_SIZE>::getBuffer() const
 }
 
 template<int REGS_SIZE>
-char* RegisterString<REGS_SIZE>::getMutableBuffer() const
+char* RegisterString<REGS_SIZE>::getMutableBuffer()
 {
     return buffer;
 }
@@ -123,7 +123,6 @@ void RegisterString<REGS_SIZE>::setFrom(const char* src)
     int len = strlen(src);
     auto cap = getCapacity();
     len = len > cap ? cap : len;
-    auto buffer = getBuffer();
     memcpy(buffer, src, len);
     setLength(len);
 }
