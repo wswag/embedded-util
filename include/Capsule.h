@@ -20,8 +20,8 @@ class ManagedObject {
     public:
         virtual ~ManagedObject() {}
 
-        // release shared resources within free() method instead of destructor
-        virtual void free() {}
+        // release shared resources within dispose() method instead of destructor
+        virtual void dispose() {}
         
         int incrRef() {
             _refCounter++;
