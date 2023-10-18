@@ -31,7 +31,7 @@ class ManagedObject {
         int decrRef() {
             _refCounter--;
             if (_refCounter == 0) {
-                free();
+                dispose();
                 delete this;
                 return 0;
             }
