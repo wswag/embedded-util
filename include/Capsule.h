@@ -19,6 +19,9 @@ class ManagedObject {
         int _refCounter = 0;
     public:
         virtual ~ManagedObject() {}
+
+        // release shared resources within free() method instead of destructor
+        virtual void free() {}
         
         int incrRef() {
             _refCounter++;
@@ -28,6 +31,7 @@ class ManagedObject {
         int decrRef() {
             _refCounter--;
             if (_refCounter == 0) {
+                free();
                 delete this;
                 return 0;
             }
