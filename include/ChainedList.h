@@ -53,7 +53,7 @@ void ChainedList<T>::prepend(T* elem)
 template<class T>
 void ChainedList<T>::rem(T *elem, T *prevElem) 
 {
-    if (_head == nullptr) return;
+    if (_head == nullptr || elem == nullptr) return;
     if (elem == _head) {
         _head = _head->next();
         return;
@@ -70,9 +70,9 @@ void ChainedList<T>::rem(T *elem, T *prevElem)
 template<class T>
 void ChainedList<T>::replace(T *elem, T* newElem, T *prevElem) 
 {
-    if (_head == nullptr) return;
+    if (_head == nullptr || elem == nullptr) return;
+    newElem->setNext(elem->next());
     if (elem == _head) {
-        newElem->setNext(_head);
         _head = newElem;
         return;
     }
@@ -81,8 +81,7 @@ void ChainedList<T>::replace(T *elem, T* newElem, T *prevElem)
         prevE = prev(elem);
     }
     if (prevE) {
-        // remove the element
-        newElem->setNext(elem->next());
+        // connect previous to new elem
         prevE->setNext(newElem);
     }
 }
