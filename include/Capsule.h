@@ -19,7 +19,7 @@ class ManagedObject {
         int _refCounter = 0;
     public:
         ManagedObject() {
-            log_d("obj constructor for %x", (int)this);
+            log_v("obj constructor for %x", (int)this);
         }
         virtual ~ManagedObject() {}
 
@@ -32,7 +32,7 @@ class ManagedObject {
         }
 
         int decrRef() {
-            log_d("decr ref of obj %x from %d", (int)this, _refCounter);
+            log_v("decr ref of obj %x from %d", (int)this, _refCounter);
             if (_refCounter > 0) {
                 _refCounter--;
                 if (_refCounter == 0) {
