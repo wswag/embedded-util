@@ -6,6 +6,8 @@ PulseGen::PulseGen(uint32_t interval)
     setInterval(interval);
     _autoReset = true;
     _init = false;
+    _impulseMode = false;
+    _impulseSent = false;
 }
 
 PulseGen::PulseGen(uint32_t interval, bool autoReset)
@@ -13,6 +15,17 @@ PulseGen::PulseGen(uint32_t interval, bool autoReset)
     setInterval(interval);
     _autoReset = autoReset;
     _init = false;
+    _impulseMode = false;
+    _impulseSent = false;
+}
+
+PulseGen::PulseGen(uint32_t interval, bool autoReset, bool impulseMode)
+{
+    setInterval(interval);
+    _autoReset = autoReset;
+    _init = false;
+    _impulseMode = impulseMode;
+    _impulseSent = false;
 }
 
 void PulseGen::setInterval(uint32_t interval)
@@ -29,6 +42,7 @@ void PulseGen::Reset()
 {
     _init = true;
     _lastTime = millis();
+    _impulseSent = false;
 }
 
 void PulseGen::Set()
@@ -40,6 +54,7 @@ void PulseGen::Set(uint32_t inMillis)
 {
     _init = true;
     _lastTime = millis() - _interval + inMillis;
+    _impulseSent = false;
 }
 
 bool PulseGen::Pulse()
@@ -51,9 +66,13 @@ bool PulseGen::Pulse()
     // also works for roll over 0
     if (currentTime - _lastTime >= _interval)
     {
-        if (_autoReset)
+        bool result = !_impulseSent || !_impulseMode;
+        _impulseSent = true;
+        if (_autoReset) {
             _lastTime = currentTime;
-        return true;
+            _impulseSent = false;
+        }
+        return result;
     }
     else
         return false;

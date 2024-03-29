@@ -10,9 +10,12 @@ class PulseGen
         uint32_t _interval;
         bool _autoReset;
         bool _init;
+        bool _impulseMode;
+        bool _impulseSent;
     public:
         PulseGen(uint32_t interval);
         PulseGen(uint32_t interval, bool autoReset);
+        PulseGen(uint32_t interval, bool autoReset, bool impulseMode);
         void setInterval(uint32_t interval);
         uint32_t getInterval();
         void Reset();

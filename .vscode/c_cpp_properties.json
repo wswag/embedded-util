@@ -26,7 +26,7 @@
                 "F_CPU=240000000L",
                 "HAVE_CONFIG_H",
                 "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"",
-                "PLATFORMIO=60111",
+                "PLATFORMIO=60114",
                 "ARDUINO_NodeMCU_32S",
                 ""
             ],
